@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopr - Add Non-Fiction Book</title>
+</head>
+<body>
+<h1>Shopr - Add Non-Fiction Book</h1>
+
+<form action="#" th:action="@{/saveNonfictionBook}" th:object="${nonfictionBook}"
+      method="POST">
+    <input type="text" th:field="*{name}"
+           placeholder="Name" >
+
+    <input  type="number" name="price" min="0" value="0" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$" th:field="*{price}"
+            placeholder="Price"  >
+
+    <input type="text" th:field="*{vendor_ID}"
+           placeholder="Vendor ID"  >
+
+    <input type="text" th:field="*{author}" placeholder="Author" >
+
+    <input type="text" th:field="*{isbn}" name="isbn" pattern="^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$" placeholder="ISBN" >
+
+    <input type="number" th:field="*{pages}" placeholder="Number of Pages" >
+
+    <select  th:field="*{nonfiction_subject}" >
+        <option th:each="subject : ${subjectList}" th:value="${subject.name()}"><span th:text="${subject.name()}"></span></option>
+    </select>
+
+    <button type="submit" > Save Item</button>
+</form>
+
+<a th:href = "@{/}"> Go back to home page</a>
+
+</body>
+</html>
