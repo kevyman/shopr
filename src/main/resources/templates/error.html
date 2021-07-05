@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navigation :: head"></head>
+<body>
+<div class="d-flex flex-column body-container">
+
+    <nav th:replace="fragments/adminNav :: adminNav"></nav>
+
+    <div class="container py-4">
+
+        <div class=row>
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="d-flex justify-content-center p-4">
+                    <h1 class="dog p-4">Oops, it broke!</h1>
+                    <h3 class="text-muted dog">Relax, I'll do my doggone best to fix it! 🐶</h3>
+                </div>
+                <img src="../images/errorDog.jpg" class="img-fluid">
+                <div class="d-flex justify-content-center p-4">
+                    <a th:href="@{/}" role="button" class="btn btn-success w-50"><i class="fas fa-paw"></i> Go back Home</a>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+    </div>
+
+    <nav th:replace="fragments/navigation :: footer"></nav>
+</div>
+
+</body>
+</html>
+

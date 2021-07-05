@@ -109,13 +109,6 @@ public class ItemController {
         return "addNonfictionBook";
     }
 
-    @GetMapping("/deleteItem/{type}/{id}")
-    public String deleteItem(@PathVariable(value = "type") String type, @PathVariable(value = "id") int id) throws NotFoundException {
-        Item item = itemService.getItemOfType(type);
-        itemService.removeByIdAndType(id, item.getClass());
-        return "redirect:/admin";
-    }
-
     @GetMapping("/editGame/{id}")
     public String showEditGameForm(@PathVariable(value = "id") int id, Model model) {
         Game game = new Game();
@@ -158,6 +151,53 @@ public class ItemController {
         model.addAttribute("subjectList", Nonfiction_subject.values());
         return "updateNonfictionBook";
     }
+
+    @GetMapping("/deleteItem/{type}/{id}")
+    public String deleteItem(@PathVariable(value = "type") String type, @PathVariable(value = "id") int id) throws NotFoundException {
+        Item item = itemService.getItemOfType(type);
+        itemService.removeByIdAndType(id, item.getClass());
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/details/{type}/{id}")
+    public String showDetailsPage(@PathVariable(value="type") String type, @PathVariable(value="id") int id, Model model){
+        Item temp = itemService.getItemOfType(type);
+        Item item = itemService.findByIdAndType(id,temp.getClass());
+
+        String page;
+
+        switch(type){
+            case "Game":
+                Game game = (Game) item;
+                model.addAttribute("game", game);
+                page = "detailGame";
+                break;
+            case "LPRecord":
+                LPRecord lpRecord = (LPRecord) item;
+                model.addAttribute("lpRecord", lpRecord);
+                page = "detailLPRecord";
+                break;
+            case "FictionBook":
+                FictionBook fictionBook = (FictionBook) item;
+                model.addAttribute("fictionBook", fictionBook);
+                page = "detailFictionBook";
+                break;
+            case "NonfictionBook":
+                NonfictionBook nonfictionBook = (NonfictionBook) item;
+                model.addAttribute("nonfictionBook", nonfictionBook);
+                page = "detailNonfictionBook";
+                break;
+            default:
+                page = "error";
+                break;
+        }
+
+        return page;
+
+    }
+
+
+
 
 
 }
