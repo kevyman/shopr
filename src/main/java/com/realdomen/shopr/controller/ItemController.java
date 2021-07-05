@@ -45,6 +45,34 @@ public class ItemController {
         return "redirect:/admin";
     }
 
+    @PostMapping("/updateGame")
+    public String updateGame(@ModelAttribute("game") Game game) {
+        // save item to database
+        itemService.updateGame(game);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/updateLPRecord")
+    public String updateLPRecord(@ModelAttribute("lpRecord")LPRecord lpRecord) {
+        // save item to database
+        itemService.updateLPRecord(lpRecord);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/updateFictionBook")
+    public String updateFictionBook(@ModelAttribute("fictionBook")FictionBook fictionBook) {
+        // save item to database
+        itemService.updateFictionBook(fictionBook);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/updateNonfictionBook")
+    public String updateNonfictionBook(@ModelAttribute("nonfictionBook") NonfictionBook nonfictionBook) {
+        // save item to database
+        itemService.updateNonfictionBook(nonfictionBook);
+        return "redirect:/admin";
+    }
+
     @GetMapping("/addGame")
     public String showNewGameForm(Model model) {
         // create model attribute to bind form data
@@ -86,6 +114,49 @@ public class ItemController {
         Item item = itemService.getItemOfType(type);
         itemService.removeByIdAndType(id, item.getClass());
         return "redirect:/admin";
+    }
+
+    @GetMapping("/editGame/{id}")
+    public String showEditGameForm(@PathVariable(value = "id") int id, Model model) {
+        Game game = new Game();
+        Item item = itemService.findByIdAndType(id,game.getClass());
+        game = (Game) item;
+        model.addAttribute("game", game);
+        model.addAttribute("gameGenreList", Game_genre.values());
+        return "updateGame";
+    }
+
+    @GetMapping("/editLPRecord/{id}")
+    public String showEditLPRecordForm(@PathVariable(value = "id") int id, Model model) {
+
+        LPRecord lpRecord = new LPRecord();
+        Item item = itemService.findByIdAndType(id,lpRecord.getClass());
+        lpRecord = (LPRecord) item;
+        model.addAttribute("lpRecord", lpRecord);
+        model.addAttribute("musicGenreList", Music_genre.values());
+        return "updateLPRecord";
+    }
+
+    @GetMapping("/editFictionBook/{id}")
+    public String showEditFictionBookForm(@PathVariable(value = "id") int id, Model model) {
+
+        FictionBook fictionBook = new FictionBook();
+        Item item = itemService.findByIdAndType(id,fictionBook.getClass());
+        fictionBook = (FictionBook) item;
+        model.addAttribute("fictionBook", fictionBook);
+        model.addAttribute("fictionGenreList", Fiction_genre.values());
+        return "updateFictionBook";
+    }
+
+    @GetMapping("/editNonfictionBook/{id}")
+    public String showEditNonfictionBookForm(@PathVariable(value = "id") int id, Model model) {
+
+        NonfictionBook nonfictionBook = new NonfictionBook();
+        Item item = itemService.findByIdAndType(id,nonfictionBook.getClass());
+        nonfictionBook = (NonfictionBook) item;
+        model.addAttribute("nonfictionBook", nonfictionBook);
+        model.addAttribute("subjectList", Nonfiction_subject.values());
+        return "updateNonfictionBook";
     }
 
 

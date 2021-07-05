@@ -3,37 +3,45 @@
 <head th:replace="fragments/navigation :: head"></head>
 <body>
 <div class="d-flex flex-column body-container">
-<nav th:replace="fragments/adminNav :: adminNav"></nav>
+    <nav th:replace="fragments/adminNav :: adminNav"></nav>
 
-<h1>Shopr - Add Fiction Book</h1>
+    <div class="container py-4">
 
-<form action="#" th:action="@{/saveFictionBook}" th:object="${fictionBook}"
-      method="POST">
-    <input type="text" th:field="*{name}"
-           placeholder="Name" >
+        <h1><i class="fas fa-plus"></i> Add Fiction Book</h1>
 
-    <input  type="number" name="price" min="0" value="0" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$" th:field="*{price}"
-            placeholder="Price"  >
 
-    <input type="text" th:field="*{vendor_ID}"
-           placeholder="Vendor ID"  >
+        <form action="#" th:action="@{/saveFictionBook}" th:object="${fictionBook}"
+              method="POST">
+            <input type="text" th:field="*{name}"
+                   placeholder="Name">
 
-    <input type="text" th:field="*{author}" placeholder="Author" >
+            <input type="number" name="price" min="0" value="0" step="0.01" title="Currency"
+                   pattern="^\d+(?:\.\d{1,2})?$" th:field="*{price}"
+                   placeholder="Price">
 
-    <input type="text" th:field="*{isbn}" name="isbn" pattern="^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$" placeholder="ISBN" >
+            <input type="text" th:field="*{vendor_ID}"
+                   placeholder="Vendor ID">
 
-    <input type="number" th:field="*{pages}" placeholder="Number of Pages" >
+            <input type="text" th:field="*{author}" placeholder="Author">
 
-    <textarea th:field="*{description}" placeholder="Short Description" ></textarea>
+            <input type="text" th:field="*{isbn}" name="isbn"
+                   pattern="^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$"
+                   placeholder="ISBN">
 
-    <select  th:field="*{fiction_genre}" >
-        <option th:each="genre : ${fictionGenreList}" th:value="${genre.name()}"><span th:text="${genre.name()}"></span></option>
-    </select>
+            <input type="number" th:field="*{pages}" placeholder="Number of Pages">
 
-    <button type="submit" > Save Item</button>
-</form>
+            <textarea th:field="*{description}" placeholder="Short Description"></textarea>
 
-<nav th:replace="fragments/navigation :: footer"></nav>
+            <select th:field="*{fiction_genre}">
+                <option th:each="genre : ${fictionGenreList}" th:value="${genre.name()}"><span
+                        th:text="${genre.name()}"></span></option>
+            </select>
+
+            <button type="submit"> Save Item</button>
+        </form>
+    </div>
+
+    <nav th:replace="fragments/navigation :: footer"></nav>
 </div>
 </body>
 </html>

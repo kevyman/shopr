@@ -6,6 +6,7 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -28,6 +29,26 @@ public class ItemService {
 
     public void saveNonfictionBook(NonfictionBook nonfictionBook){
         itemRepository.saveNonfictionBook(nonfictionBook);
+    }
+
+
+    public void updateFictionBook(FictionBook fictionBook) {
+        itemRepository.updateFictionBook(fictionBook);
+    }
+
+
+    public void updateNonfictionBook(NonfictionBook nonfictionBook) {
+        itemRepository.updateNonfictionBook(nonfictionBook);
+    }
+
+
+    public void updateGame(Game game) {
+        itemRepository.updateGame(game);
+    }
+
+
+    public void updateLPRecord(LPRecord lpRecord) {
+        itemRepository.updateLPRecord(lpRecord);
     }
 
     public List<Item> getAllItems() {

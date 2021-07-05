@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -42,6 +43,26 @@ public class ItemRepository {
         entityManager.persist(nonfictionBook);
     }
 
+    @Transactional
+    public void updateFictionBook(FictionBook fictionBook) {
+        entityManager.merge(fictionBook);
+    }
+
+    @Transactional
+    public void updateNonfictionBook(NonfictionBook nonfictionBook) {
+        entityManager.merge(nonfictionBook);
+    }
+
+    @Transactional
+    public void updateGame(Game game) {
+        entityManager.merge(game);
+    }
+
+    @Transactional
+    public void updateLPRecord(LPRecord lpRecord) {
+        entityManager.merge(lpRecord);
+    }
+
 
     public Item findByIdAndType(Integer id, Class<? extends Item> type){
         return entityManager.find(type,id);
@@ -52,6 +73,7 @@ public class ItemRepository {
         items.addAll(entityManager.createQuery("select g from Game g", Game.class).getResultList());
         items.addAll(entityManager.createQuery("select b from Book b", Book.class).getResultList());
         items.addAll(entityManager.createQuery("select l from LPRecord l", LPRecord.class).getResultList());
+        Collections.shuffle(items);
         return items;
     }
 
