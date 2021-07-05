@@ -2,11 +2,13 @@ package com.realdomen.shopr.controller;
 
 import com.realdomen.shopr.domain.*;
 import com.realdomen.shopr.service.ItemService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -19,28 +21,28 @@ public class ItemController {
     public String saveGame(@ModelAttribute("game") Game game) {
         // save item to database
         itemService.saveGame(game);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @PostMapping("/saveLPRecord")
     public String saveLPRecord(@ModelAttribute("lpRecord")LPRecord lpRecord) {
         // save item to database
         itemService.saveLPRecord(lpRecord);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @PostMapping("/saveFictionBook")
     public String saveFictionBook(@ModelAttribute("fictionBook")FictionBook fictionBook) {
         // save item to database
         itemService.saveFictionBook(fictionBook);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @PostMapping("/saveNonfictionBook")
     public String saveNonfictionBook(@ModelAttribute("nonfictionBook") NonfictionBook nonfictionBook) {
         // save item to database
         itemService.saveNonfictionBook(nonfictionBook);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @GetMapping("/addGame")
@@ -76,6 +78,15 @@ public class ItemController {
         NonfictionBook nonfictionBook = new NonfictionBook();
         model.addAttribute("nonfictionBook", nonfictionBook);
         model.addAttribute("subjectList", Nonfiction_subject.values());
-        return "addNonFictionBook";
+        return "addNonfictionBook";
     }
+
+    @GetMapping("/deleteItem/{type}/{id}")
+    public String deleteItem(@PathVariable(value = "type") String type, @PathVariable(value = "id") int id) throws NotFoundException {
+        Item item = itemService.getItemOfType(type);
+        itemService.removeByIdAndType(id, item.getClass());
+        return "redirect:/admin";
+    }
+
+
 }

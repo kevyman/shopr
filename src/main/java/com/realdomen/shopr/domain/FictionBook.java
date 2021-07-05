@@ -14,7 +14,7 @@ import javax.persistence.Enumerated;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @NoArgsConstructor
-@DiscriminatorValue(value = "FICTION_BOOK")
+@DiscriminatorValue(value = "FictionBook")
 @Entity
 public class FictionBook extends Book{
 

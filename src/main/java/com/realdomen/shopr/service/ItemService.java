@@ -46,4 +46,26 @@ public class ItemService {
         return itemRepository.findByIdAndType(id, type);
     }
 
+    public Item getItemOfType(String type){
+        Item item;
+
+        switch(type){
+
+            case "FictionBook":
+                item = new FictionBook();
+                break;
+            case "NonfictionBook":
+                item = new NonfictionBook();
+                break;
+            case "LPRecord":
+                item = new LPRecord();
+                break;
+            default:
+                item = new Game();
+                break;
+        }
+
+        return item;
+    }
+
 }

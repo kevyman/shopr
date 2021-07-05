@@ -12,7 +12,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @DiscriminatorColumn(name="type")
-@DiscriminatorValue(value="GAME")
+@DiscriminatorValue(value="Game")
 @Entity
 public class Game extends Item {
     private String publisher;

@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Shopr - Add Game</title>
-</head>
+<head th:replace="fragments/navigation :: head"></head>
 <body>
-<h1>Shopr - Add Game</h1>
+<div class="d-flex flex-column body-container">
 
-<form action="#" th:action="@{/saveGame}" th:object="${game}"
-      method="POST">
-    <input type="text" th:field="*{name}"
-           placeholder="Name" >
+<nav th:replace="fragments/adminNav :: adminNav"></nav>
 
-    <input  type="number" name="price" min="0" value="0" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$" th:field="*{price}"
-           placeholder="Price"  >
 
-    <input type="text" th:field="*{vendor_ID}"
-           placeholder="Vendor ID"  >
+    <h1>Shopr - Add Game</h1>
 
-    <select  th:field="*{game_genre}" >
-        <option th:each="genre : ${gameGenreList}" th:value="${genre.name()}"><span th:text="${genre.name()}"></span></option>
-    </select>
+    <form action="#" th:action="@{/saveGame}" th:object="${game}"
+          method="POST">
+        <input type="text" th:field="*{name}"
+               placeholder="Name" >
 
-    <input type="number" th:field="*{min_age}" placeholder="Minimum Age"  >
+        <input  type="number" name="price" min="0" value="0" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$" th:field="*{price}"
+                placeholder="Price"  >
 
-    <input type="text" th:field="*{publisher}" placeholder="Publisher"  >
-    <button type="submit" > Save Item</button>
-</form>
+        <input type="text" th:field="*{vendor_ID}"
+               placeholder="Vendor ID"  >
 
-<a th:href = "@{/}"> Go back to home page</a>
+        <select  th:field="*{game_genre}" >
+            <option th:each="genre : ${gameGenreList}" th:value="${genre.name()}"><span th:text="${genre.name()}"></span></option>
+        </select>
+
+        <input type="number" th:field="*{min_age}" placeholder="Minimum Age"  >
+
+        <input type="text" th:field="*{publisher}" placeholder="Publisher"  >
+        <button type="submit" > Save Item</button>
+    </form>
+
+    <nav th:replace="fragments/navigation :: footer"></nav>
+</div>
 
 </body>
 </html>

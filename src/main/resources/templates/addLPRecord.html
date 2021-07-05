@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Shopr - Add LP Record</title>
-</head>
+<head th:replace="fragments/navigation :: head"></head>
 <body>
+<div class="d-flex flex-column body-container">
+
+<nav th:replace="fragments/adminNav :: adminNav"></nav>
+
 <h1>Shopr - Add LP Record</h1>
 
 <form action="#" th:action="@{/saveLPRecord}" th:object="${lpRecord}"
@@ -28,7 +29,7 @@
     <button type="submit"> Save Item</button>
 </form>
 
-<a th:href="@{/}"> Go back to home page</a>
-
+<nav th:replace="fragments/navigation :: footer"></nav>
+</div>
 </body>
 </html>

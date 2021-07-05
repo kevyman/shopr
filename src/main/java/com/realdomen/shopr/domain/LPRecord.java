@@ -12,7 +12,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @DiscriminatorColumn(name="type")
-@DiscriminatorValue(value="LP_RECORD")
+@DiscriminatorValue(value="LPRecord")
 @NoArgsConstructor
 @Entity
 public class LPRecord extends Item {

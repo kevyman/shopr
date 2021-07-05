@@ -18,4 +18,10 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping(value = "/admin")
+    public String showAdminPage(Model model) {
+        model.addAttribute("allItems", itemService.getAllItems());
+        return "admin";
+    }
+
 }
