@@ -9,9 +9,9 @@
     <script src="https://kit.fontawesome.com/84b59c857b.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Luckiest+Guy&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 
     <title>Shopr</title>
 </head>
@@ -19,7 +19,7 @@
 
 <nav class="navbar navbar-expand-md navbar-light bg-light" th:fragment="nav">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}"><i class="fas fa-store"></i> Shopr</a>
+        <a class="navbar-brand shopr" th:href="@{/}"><i class="fas fa-store"></i> SHOPR</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,19 +27,25 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                    <a class="nav-link" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" th:href="@{/section/Books}">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/section/Games}">Games</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/section/Music}">Music</a>
                 </li>
 
             </ul>
 
             <ul class="navbar-nav ms-auto">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+<!--                <form class="d-flex">-->
+<!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--                </form>-->
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -52,7 +58,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i><span th:text="0"></span></a>
+                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i><span th:text="${cart.getQuantity()}"></span></a>
                 </li>
 
             </ul>

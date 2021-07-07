@@ -55,6 +55,10 @@ public class ItemService {
         return itemRepository.getAllItems();
     }
 
+    public List<Item> getAllItemsByType(String type){
+        return itemRepository.getAllItemsByType(type);
+    }
+
     public void updateItem(Item item){
         itemRepository.updateItem(item);
     }

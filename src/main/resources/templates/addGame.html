@@ -8,30 +8,62 @@
 
 
     <div class="container py-4">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-around py-5">
+                <a th:href="@{/addGame}" role="button" class="btn btn-primary" data-bs-toggle="tooltip"
+                   data-bs-placement="top" title="Add new Game"><i class="fas fa-plus fa-3x"></i><i
+                        class="fas fa-gamepad fa-5x"></i></a>
+                <a th:href="@{/addLPRecord}" role="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+                   data-bs-placement="top" title="Add new LP Record"><i class="fas fa-plus fa-3x"></i><i
+                        class="fas fa-record-vinyl fa-5x"></i></a>
+                <a th:href="@{/addFictionBook}" role="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+                   data-bs-placement="top" title="Add new Fiction Book"><i class="fas fa-plus fa-3x"></i><i
+                        class="fas fa-journal-whills fa-5x"></i></a>
+                <a th:href="@{/addNonfictionBook}" role="button" class="btn btn-outline-secondary"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Add new Non-Fiction Book"><i
+                        class="fas fa-plus fa-3x"></i><i class="fas fa-atlas fa-5x"></i></a>
+
+            </div>
+        </div>
 
         <h1><i class="fas fa-plus"></i> Add Game</h1>
 
         <form action="#" th:action="@{/saveGame}" th:object="${game}"
               method="POST">
-            <input type="text" th:field="*{name}"
-                   placeholder="Name">
 
-            <input type="number" name="price" min="0" value="0" step="0.01" title="Currency"
-                   pattern="^\d+(?:\.\d{1,2})?$" th:field="*{price}"
-                   placeholder="Price">
+            <div class="mb-3">
+                <label for="name" class="form-label">Title</label>
+                <input type="text" th:field="*{name}"
+                       placeholder="Name" id="name" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" name="price" min="0" value="0" step="0.01" title="Currency"
+                       pattern="^\d+(?:\.\d{1,2})?$" th:field="*{price}"
+                       placeholder="Price" id="price" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="vendor" class="form-label">Vendor</label>
+                <input type="text" th:field="*{vendor_ID}"
+                       placeholder="Vendor ID" id="vendor" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="genre" class="form-label">Genre</label>
+                <select th:field="*{game_genre}" id="genre" class="form-control">
+                    <option th:each="genre : ${gameGenreList}" th:value="${genre.name()}"><span
+                            th:text="${genre.name()}"></span></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">Minimum Allowed Age</label>
+                <input type="number" th:field="*{min_age}" placeholder="Minimum Age" id="age" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="publisher" class="form-label">Publisher</label>
+                <input type="text" th:field="*{publisher}" placeholder="Publisher" id="publisher" class="form-control">
+            </div>
 
-            <input type="text" th:field="*{vendor_ID}"
-                   placeholder="Vendor ID">
-
-            <select th:field="*{game_genre}">
-                <option th:each="genre : ${gameGenreList}" th:value="${genre.name()}"><span
-                        th:text="${genre.name()}"></span></option>
-            </select>
-
-            <input type="number" th:field="*{min_age}" placeholder="Minimum Age">
-
-            <input type="text" th:field="*{publisher}" placeholder="Publisher">
-            <button type="submit"> Save Item</button>
+            <button type="submit" class="btn btn-success"> Save Item</button>
         </form>
     </div>
 

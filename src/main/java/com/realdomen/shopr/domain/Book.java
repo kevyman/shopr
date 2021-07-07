@@ -1,5 +1,7 @@
 package com.realdomen.shopr.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -26,5 +28,15 @@ public abstract class Book extends Item {
             "(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$" , message = "ISBN must be correctly formatted.")
     private String isbn;
     private Integer pages;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "Book_OBook",
+            joinColumns =
+                    { @JoinColumn(name = "book_id", referencedColumnName = "id") },
+            inverseJoinColumns =
+                    { @JoinColumn(name = "ob_id", referencedColumnName = "id") })
+    @JsonManagedReference
+    private OBook oBook;
 
 }

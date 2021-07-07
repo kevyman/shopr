@@ -7,38 +7,86 @@
 
     <div class="container py-4">
 
+        <div class="container-fluid">
+            <div class="d-flex justify-content-around py-5">
+                <a th:href="@{/addGame}" role="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+                   data-bs-placement="top" title="Add new Game"><i class="fas fa-plus fa-3x"></i><i
+                        class="fas fa-gamepad fa-5x"></i></a>
+                <a th:href="@{/addLPRecord}" role="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+                   data-bs-placement="top" title="Add new LP Record"><i class="fas fa-plus fa-3x"></i><i
+                        class="fas fa-record-vinyl fa-5x"></i></a>
+                <a th:href="@{/addFictionBook}" role="button" class="btn btn-primary" data-bs-toggle="tooltip"
+                   data-bs-placement="top" title="Add new Fiction Book"><i class="fas fa-plus fa-3x"></i><i
+                        class="fas fa-journal-whills fa-5x"></i></a>
+                <a th:href="@{/addNonfictionBook}" role="button" class="btn btn-outline-secondary"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Add new Non-Fiction Book"><i
+                        class="fas fa-plus fa-3x"></i><i class="fas fa-atlas fa-5x"></i></a>
+
+            </div>
+        </div>
+
+
         <h1><i class="fas fa-plus"></i> Add Fiction Book</h1>
 
 
         <form action="#" th:action="@{/saveFictionBook}" th:object="${fictionBook}"
               method="POST">
-            <input type="text" th:field="*{name}"
-                   placeholder="Name">
+            <div class="mb-3">
+                <label for="name" class="form-label">Title</label>
+                <input type="text" th:field="*{name}"
+                       placeholder="Name" id="name" class="form-control">
+            </div>
 
-            <input type="number" name="price" min="0" value="0" step="0.01" title="Currency"
-                   pattern="^\d+(?:\.\d{1,2})?$" th:field="*{price}"
-                   placeholder="Price">
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" name="price" min="0" value="0" step="0.01" title="Currency"
+                       pattern="^\d+(?:\.\d{1,2})?$" th:field="*{price}"
+                       placeholder="Price" id="price" class="form-control">
+            </div>
 
-            <input type="text" th:field="*{vendor_ID}"
-                   placeholder="Vendor ID">
+            <div class="mb-3">
+                <label for="vendor" class="form-label">Vendor</label>
+                <input type="text" th:field="*{vendor_ID}"
+                       placeholder="Vendor ID" id="vendor" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="author" class="form-label">Author</label>
+                <input type="text" th:field="*{author}" placeholder="Author" id="author" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="isbn" class="form-label">ISBN</label>
+                <input type="text" th:field="*{isbn}" name="isbn"
+                       pattern="^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$"
+                       placeholder="ISBN" id="isbn" class="form-control">
+                <span id="isbnHelpInline" class="form-text">
+      Must be 10 or 13 numbers long.
+    </span>
+            </div>
 
-            <input type="text" th:field="*{author}" placeholder="Author">
+            <div class="mb-3">
+                <label for="pages" class="form-label">Number of Pages</label>
+                <input type="number" th:field="*{pages}" placeholder="Number of Pages" id="pages" class="form-control">
+            </div>
 
-            <input type="text" th:field="*{isbn}" name="isbn"
-                   pattern="^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$"
-                   placeholder="ISBN">
+            <div class="mb-3">
+                <label for="description" class="form-label">Short Description</label>
+                <textarea th:field="*{description}" placeholder="Short Description" maxlength="200" id="description"
+                          class="form-control"></textarea>
+                <span id="descriptionHelpInline" class="form-text">
+      Must be less than 200 characters long.
+    </span>
+            </div>
 
-            <input type="number" th:field="*{pages}" placeholder="Number of Pages">
-
-            <textarea th:field="*{description}" placeholder="Short Description"></textarea>
-
-            <select th:field="*{fiction_genre}">
-                <option th:each="genre : ${fictionGenreList}" th:value="${genre.name()}"><span
-                        th:text="${genre.name()}"></span></option>
-            </select>
-
-            <button type="submit"> Save Item</button>
+            <div class="mb-3">
+                <label for="genre" class="form-label">Genre</label>
+                <select th:field="*{fiction_genre}" id="genre" class="form-control">
+                    <option th:each="genre : ${fictionGenreList}" th:value="${genre.name()}"><span
+                            th:text="${genre.name()}"></span></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success"> Save Item</button>
         </form>
+
     </div>
 
     <nav th:replace="fragments/navigation :: footer"></nav>

@@ -1,6 +1,6 @@
 .footer {
     min-height:50px;
-    background:PapayaWhip;
+    background:Lavender;
 }
 
 .body-container{
@@ -13,4 +13,12 @@
 
 .dog{
     font-family: 'Indie Flower', cursive;
+}
+
+.shopr{
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.boutline{
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
 }

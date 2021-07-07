@@ -2,6 +2,7 @@ package com.realdomen.shopr.controller;
 
 import com.realdomen.shopr.domain.*;
 import com.realdomen.shopr.service.ItemService;
+import com.realdomen.shopr.service.OrderService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,11 +12,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
+
 @Controller
 public class ItemController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private OrderService orderService;
 
     @PostMapping("/saveGame")
     public String saveGame(@ModelAttribute("game") Game game) {
@@ -75,7 +81,10 @@ public class ItemController {
 
     @GetMapping("/addGame")
     public String showNewGameForm(Model model) {
-        // create model attribute to bind form data
+        Cart cart = orderService.getNewestOrder();
+        model.addAttribute("cart", cart);
+
+
         Game game = new Game();
         model.addAttribute("game", game);
         model.addAttribute("gameGenreList", Game_genre.values());
@@ -84,6 +93,9 @@ public class ItemController {
 
     @GetMapping("/addLPRecord")
     public String showNewLPRecordForm(Model model) {
+        Cart cart = orderService.getNewestOrder();
+        model.addAttribute("cart", cart);
+
         // create model attribute to bind form data
         LPRecord lpRecord = new LPRecord();
         model.addAttribute("lpRecord", lpRecord);
@@ -93,6 +105,9 @@ public class ItemController {
 
     @GetMapping("/addFictionBook")
     public String showNewFictionBookForm(Model model) {
+        Cart cart = orderService.getNewestOrder();
+        model.addAttribute("cart", cart);
+
         // create model attribute to bind form data
         FictionBook fictionBook = new FictionBook();
         model.addAttribute("fictionBook", fictionBook);
@@ -102,6 +117,9 @@ public class ItemController {
 
     @GetMapping("/addNonfictionBook")
     public String showNewNonfictionBookForm(Model model) {
+        Cart cart = orderService.getNewestOrder();
+        model.addAttribute("cart", cart);
+
         // create model attribute to bind form data
         NonfictionBook nonfictionBook = new NonfictionBook();
         model.addAttribute("nonfictionBook", nonfictionBook);
@@ -111,6 +129,9 @@ public class ItemController {
 
     @GetMapping("/editGame/{id}")
     public String showEditGameForm(@PathVariable(value = "id") int id, Model model) {
+        Cart cart = orderService.getNewestOrder();
+        model.addAttribute("cart", cart);
+
         Game game = new Game();
         Item item = itemService.findByIdAndType(id,game.getClass());
         game = (Game) item;
@@ -121,6 +142,8 @@ public class ItemController {
 
     @GetMapping("/editLPRecord/{id}")
     public String showEditLPRecordForm(@PathVariable(value = "id") int id, Model model) {
+        Cart cart = orderService.getNewestOrder();
+        model.addAttribute("cart", cart);
 
         LPRecord lpRecord = new LPRecord();
         Item item = itemService.findByIdAndType(id,lpRecord.getClass());
@@ -132,6 +155,8 @@ public class ItemController {
 
     @GetMapping("/editFictionBook/{id}")
     public String showEditFictionBookForm(@PathVariable(value = "id") int id, Model model) {
+        Cart cart = orderService.getNewestOrder();
+        model.addAttribute("cart", cart);
 
         FictionBook fictionBook = new FictionBook();
         Item item = itemService.findByIdAndType(id,fictionBook.getClass());
@@ -143,6 +168,8 @@ public class ItemController {
 
     @GetMapping("/editNonfictionBook/{id}")
     public String showEditNonfictionBookForm(@PathVariable(value = "id") int id, Model model) {
+        Cart cart = orderService.getNewestOrder();
+        model.addAttribute("cart", cart);
 
         NonfictionBook nonfictionBook = new NonfictionBook();
         Item item = itemService.findByIdAndType(id,nonfictionBook.getClass());
@@ -161,39 +188,56 @@ public class ItemController {
 
     @GetMapping("/details/{type}/{id}")
     public String showDetailsPage(@PathVariable(value="type") String type, @PathVariable(value="id") int id, Model model){
+        Cart cart = orderService.getNewestOrder();
+
         Item temp = itemService.getItemOfType(type);
         Item item = itemService.findByIdAndType(id,temp.getClass());
-
-        String page;
 
         switch(type){
             case "Game":
                 Game game = (Game) item;
                 model.addAttribute("game", game);
-                page = "detailGame";
-                break;
+//                OGame oGame = new OGame();
+//                oGame.setGame(game);
+//                oGame.setCart(cart);
+////                model.addAttribute("oGame", oGame);
+//                cart.addGame(oGame);
+                model.addAttribute("cart", cart);
+                return "detailGame";
+
             case "LPRecord":
                 LPRecord lpRecord = (LPRecord) item;
                 model.addAttribute("lpRecord", lpRecord);
-                page = "detailLPRecord";
-                break;
+//                OLPRecord olpRecord = new OLPRecord();
+//                olpRecord.setLpRecord(lpRecord);
+//                olpRecord.setCart(cart);
+////                model.addAttribute("olpRecord", olpRecord);
+//                cart.addLP(olpRecord);
+                model.addAttribute("cart", cart);
+                return "detailLPRecord";
+
             case "FictionBook":
                 FictionBook fictionBook = (FictionBook) item;
                 model.addAttribute("fictionBook", fictionBook);
-                page = "detailFictionBook";
-                break;
+//                OBook oBook = new OBook();
+//                oBook.setBook(fictionBook);
+//                oBook.setCart(cart);
+////                model.addAttribute("oBook", oBook);
+//                cart.addBook(oBook);
+                model.addAttribute("cart", cart);
+                return "detailFictionBook";
+
             case "NonfictionBook":
                 NonfictionBook nonfictionBook = (NonfictionBook) item;
                 model.addAttribute("nonfictionBook", nonfictionBook);
-                page = "detailNonfictionBook";
-                break;
-            default:
-                page = "error";
-                break;
+//                OBook oBook2 = new OBook();
+//                oBook2.setBook(nonfictionBook);
+////                model.addAttribute("oBook", oBook2);
+//                cart.addBook(oBook2);
+                model.addAttribute("cart", cart);
+                return "detailNonfictionBook";
         }
-
-        return page;
-
+        return "error";
     }
 
 

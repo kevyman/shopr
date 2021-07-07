@@ -77,6 +77,26 @@ public class ItemRepository {
         return items;
     }
 
+    public List<Item> getAllItemsByType(String type){
+        List<Item> items = new ArrayList<>();
+
+        switch(type){
+            case "Games":
+                items.addAll(entityManager.createQuery("select g from Game g", Game.class).getResultList());
+                break;
+
+            case "Books":
+                items.addAll(entityManager.createQuery("select b from Book b", Book.class).getResultList());
+                break;
+
+            case "Music":
+                items.addAll(entityManager.createQuery("select l from LPRecord l", LPRecord.class).getResultList());
+                break;
+
+        }
+        return items;
+    }
+
     @Transactional
     public void updateItem(Item item){
         entityManager.merge(item);

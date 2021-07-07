@@ -1,5 +1,7 @@
 package com.realdomen.shopr.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -19,4 +21,14 @@ public class LPRecord extends Item {
     private String artist;
     @Enumerated(EnumType.STRING)
     private Music_genre music_genre;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "LPRecord_OLPRecord",
+            joinColumns =
+                    { @JoinColumn(name = "lp_id", referencedColumnName = "id") },
+            inverseJoinColumns =
+                    { @JoinColumn(name = "ol_id", referencedColumnName = "id") })
+    @JsonManagedReference
+    private OLPRecord oLPRecord;
 }

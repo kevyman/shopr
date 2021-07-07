@@ -13,7 +13,7 @@
         <div class="row row-cols-1 row-cols-md-4 g-4">
             <div th:each="item:${allItems}" th:switch="${item.type}" class="col">
                 <div th:case="'Game'" class="card h-100">
-                    <a href="#"><img src="images/game.jpg" class="card-img-top" th:alt="${item.name}"></a>
+                    <a th:href="@{/details/{type}/{id}(type=${item.type},id=${item.id})}"><img src="images/game.jpg" class="card-img-top" th:alt="${item.name}"></a>
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-gamepad"></i> <span th:text="${item.name}"></span></h5>
                         <p class="card-text">$<span th:text="${item.price}"></span></p>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div th:case="'LPRecord'" class="card h-100">
-                    <a href="#"><img src="images/LPRecord.jpg" class="card-img-top" th:alt="${item.name}"></a>
+                    <a th:href="@{/details/{type}/{id}(type=${item.type},id=${item.id})}"><img src="images/LPRecord.jpg" class="card-img-top" th:alt="${item.name}"></a>
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-record-vinyl"></i> <span th:text="${item.name}"></span>
                         </h5>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div th:case="'FictionBook'" class="card h-100">
-                    <a href="#"><img src="images/fictionBook.jpg" class="card-img-top" th:alt="${item.name}"></a>
+                    <a th:href="@{/details/{type}/{id}(type=${item.type},id=${item.id})}"><img src="images/fictionBook.jpg" class="card-img-top" th:alt="${item.name}"></a>
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-journal-whills"></i> <span
                                 th:text="${item.name}"></span>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div th:case="'NonfictionBook'" class="card h-100">
-                    <a href="#"><img src="images/nonfictionBook.jpg" class="card-img-top" th:alt="${item.name}"></a>
+                    <a th:href="@{/details/{type}/{id}(type=${item.type},id=${item.id})}"><img src="images/nonfictionBook.jpg" class="card-img-top" th:alt="${item.name}"></a>
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-atlas"></i> <span th:text="${item.name}"></span></h5>
                         <p class="card-text">$<span th:text="${item.price}"></span>
